@@ -3,7 +3,7 @@ import json, os
 import openai
 
 from openai import OpenAI
-client = OpenAI(api_key = "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")
+client = OpenAI(api_key = "API KEY GOES HERE")
 
 class Replacer(models.Model):
 
