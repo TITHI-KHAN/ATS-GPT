@@ -4,6 +4,7 @@ import openai
 
 from openai import OpenAI
 # api key goes here 
+client = OpenAI(api_key = "API KEY GOES HERE")
 
 class Replacer(models.Model):
 
