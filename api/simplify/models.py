@@ -3,7 +3,7 @@ import json, os
 import openai
 
 from openai import OpenAI
-client = OpenAI(api_key = "API KEY GOES HERE")
+# api key goes here 
 
 class Replacer(models.Model):
 
