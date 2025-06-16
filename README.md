@@ -1,32 +1,165 @@
-# ATS-Prototype-GPT
-
-## Automatic Text Simplification (ATS) Prototype GPT
-
-This paragraph, meticulously composed with a deliberate complexity, stands as a quintessential example of intricate writing, aimed at illustrating the sophisticated interplay of syntax, diction, and thematic depth that can be achieved through careful linguistic craftsmanship. Conceived and articulated by me, it exemplifies how a writer can deftly employ an array of advanced vocabulary, multifaceted sentence structures, and layered meanings to construct a narrative that not only challenges the reader's cognitive engagement but also enriches their interpretive experience.
-
-By weaving together a rich tapestry of descriptive language, nuanced insights, and seamless transitions, the paragraph aspires to transcend mere textual communication, embodying instead a form of intellectual artistry. In doing so, it serves a dual purpose: to provide a concrete demonstration of the potential for complexity in writing to enhance both the aesthetic and analytical dimensions of a text, and to underscore my own proficiency in the art of crafting elaborate and thought-provoking prose. As twilight descended over the sprawling metropolis, the cityscape transformed into a glittering mosaic of neon lights and shadowy silhouettes, while the hum of activity below created a symphony of urban life, punctuated by the occasional distant wail of sirens. Amidst the cacophony of the bustling city, where the relentless clatter of footsteps and the distant hum of traffic intertwined like a chaotic symphony, she found solace in the small, hidden garden nestled between towering skyscrapers, where the delicate fragrance of jasmine and the soft rustling of leaves offered a fleeting escape from the frenetic pace of urban life.
-
-# Automatic Text Simplification (ATS) Prototype
+# Automatic Text Simplification (ATS) Prototype GPT
 
 This Chrome extension was used in the paper "Design and Evaluation of an Automatic Text Simplification Prototype with Deaf and Hard-of-hearing Readers" presented at the ASSETS 2024 Conference. It provides a customizable interface for ATS systems.
 
-## Installing The Extension
-- Open Chrome Extension Settings (chrome://extensions), turn on developer mode, select "Load Unpacked", and select the project directory named *app*.
+This project includes a Django-based API and a Chrome Extension. Follow the steps below to set up and run the project locally.
 
-## Running the API
-- Make sure the virtualenv is active (if it isn't, run 'source thanos/bin/activate' assuming your virtual env is named thanos)
-  - If you don't have a virtualenv set up yet, see "API Set-up for First Time Use" below.
-- From the main directory, run 'python api/manage.py runserver.' A message saying "Starting development server at `http://127.0.0.1:8000/`" should display.
+---
 
-## API Set-up for First Time Use
-- Set up a virtual env
-  - To create one, follow these steps:
-    - Install the [virtualenv Python package](https://pypi.org/project/virtualenv/) using pip (i.e. 'pip install virtualenv')
-	- Then, from the main directory, run 'python -m virtualenv thanos'
-  - Activate the virtual env (i.e. run 'source thanos/bin/activate' assuming your virtual env is named thanos)
-  - Then, install the required packages by running 'pip install -r api/requirements'
+## 📁 Folder Structure
 
-\* *Depending on your setup, you might need to type 'python3' instead of 'python' when typing the commands above, and 'pip3' instead of 'pip'*
+```
+project-root/
+├── api/           # Django API code
+├── app/           # Chrome extension code
+├── thanos/        # Virtual environment (auto-generated)
+└── README.md
+```
+
+---
+
+## 🚀 Chrome Extension Setup
+
+1. Open **Google Chrome**
+2. Navigate to `chrome://extensions`
+3. Enable **Developer Mode** (toggle in the top right)
+4. Click **Load Unpacked**
+5. Select the folder named `app`
+
+---
+
+## ⚙️ API Setup (First-Time Use)
+
+### a. Open Terminal
+
+Make sure you’re in the **root directory** of the project:
+
+```bash
+cd /path/to/your/project
+```
+
+---
+
+### b. Install `virtualenv`
+
+Run one of the following:
+
+```bash
+pip install virtualenv      # If pip is linked to Python 3
+# or
+pip3 install virtualenv     # If pip is for Python 2
+```
+
+---
+
+### c. Create a Virtual Environment
+
+From the project root directory, run:
+
+```bash
+python -m virtualenv thanos
+# or
+python3 -m virtualenv thanos
+```
+This will create a virtual environment folder named **thanos**.
+
+---
+
+### d. Activate the Virtual Environment
+
+#### On macOS/Linux:
+
+```bash
+source thanos/bin/activate
+```
+
+#### On Windows:
+
+```bash
+thanos\Scripts\activate
+```
+
+When activated, your prompt will look like:
+
+```
+(thanos) $
+```
+
+---
+
+### e. Install Required Packages
+
+Once activated, install the dependencies listed in api/requirements:
+
+```bash
+pip install -r api/requirements.txt
+# or
+pip3 install -r api/requirements.txt
+```
+
+> If you get `ModuleNotFoundError: No module named 'openai'` or similar:
+> 
+> ```bash
+> pip install openai
+> ```
+
+---
+
+### 🛑 To Deactivate the Virtual Environment
+
+```bash
+deactivate
+```
+
+---
+
+## 🔄 Running the API Server
+
+1. Ensure you're in the project root (the folder with `api/`):
+
+```bash
+ls
+# You should see: api app thanos ...
+```
+
+2. Activate the virtual environment:
+
+```bash
+source thanos/bin/activate
+```
+
+You’ll know it’s active if your terminal prompt starts with (thanos)
+
+3. Run the Django server:
+
+```bash
+python api/manage.py runserver
+```
+
+Expected output:
+
+```
+Starting development server at http://127.0.0.1:8000/
+```
+
+4. Open your browser and go to:
+
+```
+http://127.0.0.1:8000/
+```
+
+You should see:
+
+```
+Welcome to the Simplification API
+```
+
+---
+
+## ✅ Done!
+
+You're all set. If anything breaks or shows errors, check the terminal logs and install any missing packages.
+
 
 # Example
 
