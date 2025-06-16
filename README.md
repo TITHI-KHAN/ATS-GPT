@@ -2,7 +2,7 @@
 
 This Chrome extension was used in the paper "Design and Evaluation of an Automatic Text Simplification Prototype with Deaf and Hard-of-hearing Readers" presented at the ASSETS 2024 Conference. It provides a customizable interface for ATS systems.
 
-This project includes a Django-based API and a Chrome Extension. Follow the steps below to set up and run the project locally.
+This project includes a Django-based API and a Chrome Extension. **Follow the steps below to set up and run the project locally.**
 
 ---
 
