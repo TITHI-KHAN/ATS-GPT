@@ -179,7 +179,9 @@ Welcome to the Simplification API
 
 ## Done!
 
-You're all set. If anything breaks or shows errors, check the terminal logs and install any missing packages.
+You’re all set! Now, reload the page containing the example text to see the ATS system in action.
+
+If something doesn’t work or you encounter any errors, check the terminal for logs — they’ll often point to what’s wrong. You may need to install missing packages or dependencies.
 
 
 # Usage
