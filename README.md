@@ -4,7 +4,6 @@ This Chrome extension was used in the paper "Design and Evaluation of an Automat
 
 This project includes a Django-based API and a Chrome Extension. **Follow the steps below to set up and run the project locally.**
 
----
 
 ## 📁 Folder Structure
 
@@ -16,7 +15,6 @@ project-root/
 └── README.md
 ```
 
----
 
 ## 🚀 Chrome Extension Setup
 
@@ -26,7 +24,6 @@ project-root/
 4. Click **Load Unpacked**
 5. Select the folder named `app`
 
----
 
 ## ⚙️ API Setup (First-Time Use)
 
@@ -38,8 +35,6 @@ Make sure you’re in the **root directory** of the project:
 cd /path/to/your/project
 ```
 
----
-
 ### b. Install `virtualenv`
 
 Run one of the following:
@@ -49,8 +44,6 @@ pip install virtualenv      # If pip is linked to Python 3
 # or
 pip3 install virtualenv     # If pip is for Python 2
 ```
-
----
 
 ### c. Create a Virtual Environment
 
@@ -62,8 +55,6 @@ python -m virtualenv thanos
 python3 -m virtualenv thanos
 ```
 This will create a virtual environment folder named **thanos**.
-
----
 
 ### d. Activate the Virtual Environment
 
@@ -85,8 +76,6 @@ When activated, your prompt will look like:
 (thanos) $
 ```
 
----
-
 ### e. Install Required Packages
 
 Once activated, install the dependencies listed in api/requirements:
@@ -103,15 +92,11 @@ pip3 install -r api/requirements.txt
 > pip install openai
 > ```
 
----
-
 ### 🛑 To Deactivate the Virtual Environment
 
 ```bash
 deactivate
 ```
-
----
 
 ## 🔄 Running the API Server
 
@@ -154,7 +139,6 @@ You should see:
 Welcome to the Simplification API
 ```
 
----
 
 ## ✅ Done!
 
