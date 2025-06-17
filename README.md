@@ -66,10 +66,6 @@ project-root/
 
 Make sure you’re in the **root directory** of the project:
 
-```bash
-cd /path/to/your/project
-```
-
 ### b. Install `virtualenv`
 
 Run one of the following:
