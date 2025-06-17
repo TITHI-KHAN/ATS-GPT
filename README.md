@@ -215,7 +215,7 @@ series = {ASSETS '24}
 
 - When using temporary in-place replacements, if the replacement text is shorter than the original, that may cause it toggle really quickly and sometimes get stuck.
 - Lexical simplification only works with individual words. However, current simplifications models may also simplify phrases.
+- After loading the extension and starting the API server, you might see an “Error” or “Inactive” label next to the extension. If that happens, try reloading the extension from the Extensions page.
+- Once the extension is reloaded, refresh the browser tab where the example text is shown to see the ATS system in action.
+- It may take approximately 1 minute for the ATS-GPT system to work. Please be patient.
 
-# Contributors
-
-[abhaydixit](https://github.com/abhaydixit) and [danieldrumma](https://github.com/danieldrumma) did most of the development, supervised and reviewed by [oliveralonzo](https://github.com/oliveralonzo).
