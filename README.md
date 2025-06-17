@@ -64,11 +64,13 @@ project-root/
 
 ### a. Open Terminal
 
-Make sure you’re in the **root directory** of the project:
+Make sure you’re in the **root directory** of the project. You can confirm this by running:
 
 ```bash
-cd /path/to/your/project
+pwd 
 ```
+
+The output should end with **ATS-GPT**, indicating you’re in the correct directory.
 
 ### b. Install `virtualenv`
 
@@ -89,7 +91,7 @@ python -m virtualenv thanos
 # or
 python3 -m virtualenv thanos
 ```
-This will create a virtual environment folder named **thanos**.
+This will create a virtual environment folder named **thanos**. 
 
 ### d. Activate the Virtual Environment
 
@@ -177,7 +179,9 @@ Welcome to the Simplification API
 
 ## Done!
 
-You're all set. If anything breaks or shows errors, check the terminal logs and install any missing packages.
+You’re all set! Now, reload the page containing the example text to see the ATS system in action.
+
+If something doesn’t work or you encounter any errors, check the terminal for logs — they’ll often point to what’s wrong. You may need to install missing packages or dependencies.
 
 
 # Usage
@@ -211,7 +215,7 @@ series = {ASSETS '24}
 
 - When using temporary in-place replacements, if the replacement text is shorter than the original, that may cause it toggle really quickly and sometimes get stuck.
 - Lexical simplification only works with individual words. However, current simplifications models may also simplify phrases.
+- After loading the extension and starting the API server, you might see an “Error” or “Inactive” label next to the extension. If that happens, try reloading the extension from the Extensions page.
+- Once the extension is reloaded, refresh the browser tab where the example text is shown to see the ATS system in action.
+- It may take approximately 1 minute for the ATS-GPT system to work. Please be patient.
 
-# Contributors
-
-[abhaydixit](https://github.com/abhaydixit) and [danieldrumma](https://github.com/danieldrumma) did most of the development, supervised and reviewed by [oliveralonzo](https://github.com/oliveralonzo).
