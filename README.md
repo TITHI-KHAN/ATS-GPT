@@ -82,6 +82,14 @@ pip install virtualenv      # If pip is linked to Python 3
 pip3 install virtualenv     # If pip is for Python 2
 ```
 
+If you're using **Python 3.3+**, it's recommended to use the built-in `venv` module instead of installing `virtualenv`.
+
+To use `venv` (recommended):
+
+```bash
+python3 -m venv thanos
+```
+
 ### c. Create a Virtual Environment
 
 From the project root directory, run:
