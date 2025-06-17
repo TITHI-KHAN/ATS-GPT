@@ -91,7 +91,7 @@ python -m virtualenv thanos
 # or
 python3 -m virtualenv thanos
 ```
-This will create a virtual environment folder named **thanos**.
+This will create a virtual environment folder named **thanos**. 
 
 ### d. Activate the Virtual Environment
 
