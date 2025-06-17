@@ -47,7 +47,7 @@ This project includes a Django-based API and a Chrome Extension. **Follow the st
 project-root/
 ├── api/           # Django API code
 ├── app/           # Chrome extension code
-├── thanos/        # Virtual environment (auto-generated)
+├── thanos/        # Virtual environment after setting up the virtual environment (auto-generated)
 └── README.md
 ```
 
