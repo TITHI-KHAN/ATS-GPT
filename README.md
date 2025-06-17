@@ -64,7 +64,13 @@ project-root/
 
 ### a. Open Terminal
 
-Make sure you’re in the **root directory** of the project:
+Make sure you’re in the **root directory** of the project. You can check through 
+
+```bash
+pwd 
+```
+
+to see if the final repository is "ATS-GPT".
 
 ### b. Install `virtualenv`
 
