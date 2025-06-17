@@ -41,7 +41,7 @@ A gentle breeze carried the scent of blooming jasmine through the quiet, moonlit
 
 This project includes a Django-based API and a Chrome Extension. **Follow the steps below to set up and run the project locally.**
 
-## 📁 Folder Structure
+## Folder Structure
 
 ```
 project-root/
@@ -51,7 +51,7 @@ project-root/
 └── README.md
 ```
 
-## 🚀 Chrome Extension Setup
+## Chrome Extension Setup
 
 1. Open **Google Chrome**
 2. Navigate to `chrome://extensions`
@@ -60,7 +60,7 @@ project-root/
 5. Select the folder named `app`
 
 
-## ⚙️ API Setup (First-Time Use)
+## API Setup (First-Time Use)
 
 ### a. Open Terminal
 
@@ -127,13 +127,13 @@ pip3 install -r api/requirements.txt
 > pip install openai
 > ```
 
-### 🛑 To Deactivate the Virtual Environment
+### To Deactivate the Virtual Environment
 
 ```bash
 deactivate
 ```
 
-## 🔄 Running the API Server
+## Running the API Server
 
 1. Ensure you're in the project root (the folder with `api/`):
 
@@ -175,7 +175,7 @@ Welcome to the Simplification API
 ```
 
 
-## ✅ Done!
+## Done!
 
 You're all set. If anything breaks or shows errors, check the terminal logs and install any missing packages.
 
@@ -187,6 +187,8 @@ The extension sends all sentences to the API and expects a JSON object in return
 To use your own system, you can start by modifying the models.py file under /api to use a live model instead of pulling from the sample file. Alternatively, you or your model can create a JSON file following the sample format and the existing code should continue to work.
 
 # Citation
+
+This is the citation to the original paper "Design and Evaluation of an Automatic Text Simplification Prototype with Deaf and Hard-of-hearing Readers" presented at the ASSETS 2024 Conference. 
 
 ```
 @inproceedings{10.1145/3663548.3675645,
