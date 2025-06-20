@@ -135,9 +135,20 @@ document.addEventListener("DOMContentLoaded", function (event) {
         for (const [setting, preset] of Object.entries(presets)) {
           $("#" + setting).parent().addClass("hide");
           settings[setting] = preset;
-        };
+
+          // If the preset setting is 'grade', we set the grade here
+          if (setting === "grade") {
+            settings["grade"] = preset;  // Set the grade (Elementary, High-School, College)
+          }
+        }
       }
     }
+
+    // After applying the presets, we check to make sure the grade is correctly displayed
+    if (settings["grade"]) {
+      $("#" + settings["grade"]).prop("checked", true);
+    }
+   
   }
 
 
