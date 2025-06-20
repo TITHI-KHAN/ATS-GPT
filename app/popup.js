@@ -28,21 +28,24 @@ document.addEventListener("DOMContentLoaded", function (event) {
       "highlightComplexToggle": true,
       "whereToSetting": "Popup",
       "howLongSetting": "Manual",
-      "highlightReplacedToggle": true
+      "highlightReplacedToggle": true,
+      "grade": "Elementary"  // Default Grade Level for "lexical"
     },
     "syntactic_and_lexical": {
       "howMuchSetting": "Sentence",
       "highlightComplexToggle": true,
       "whereToSetting": "InPlace",
       "howLongSetting": "Manual",
-      "highlightReplacedToggle": true
+      "highlightReplacedToggle": true,
+      "grade": "High-School"  // Default Grade Level for "syntactic_and_lexical"
     },
     "syntactic": {
       "howMuchSetting": "Sentence",
       "highlightComplexToggle": true,
       "whereToSetting": "InPlace",
       "howLongSetting": "Manual",
-      "highlightReplacedToggle": true
+      "highlightReplacedToggle": true,
+      "grade": "College"  // Default Grade Level for "syntactic"
     }
   }
   
