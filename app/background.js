@@ -97,16 +97,7 @@
           from: "API",
           toChange: toSend,
           textType: type,
-        },
-        function (response) {
-          // FIX: Check runtime.lastError exists before logging it
-          if (chrome.runtime.lastError) {
-            console.error("SendMessage error:", chrome.runtime.lastError.message || JSON.stringify(chrome.runtime.lastError));
-          } else {
-            console.log("Message sent successfully:", response);
-          }
-        }
-        );
+        });
       });
     }
   }
