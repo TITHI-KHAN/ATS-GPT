@@ -11,11 +11,25 @@
    *    toSimplify: [...sentences to simplify]}
    */
   chrome.runtime.onMessage.addListener(async function (request) {
-    if (request.from === "content") {
-      sentenceData = request.toSimplify;
-      await getNewText(sentenceData, "sentence");
+    if (request.from === "popup") {
+        const gradeLevel = request.gradeLevel; // Get the grade level from popup
+
+        // Define a mapping for grade levels to adjust the simplification prompt
+        let gradePrompt = "";
+        if (gradeLevel === "Elementary") {
+            gradePrompt = "Reader has elementary level reading proficiency.";
+        } else if (gradeLevel === "High-School") {
+            gradePrompt = "Reader has high school level reading proficiency.";
+        } else if (gradeLevel === "College") {
+            gradePrompt = "Reader has college-level reading proficiency.";
+        }
+
+        sentenceData = request.toSimplify;
+        await getNewText(sentenceData, "sentence", gradePrompt);
     }
-  });
+});
+
+ 
 
   /**
    * Perform API call to simplify text
@@ -26,26 +40,20 @@
    * @returns a JSON object containing simplified versions of the provided text argument that
    * align with the simplification settings, currently pulled from sample.json
    */
-  async function requestSimplification(text, type, grade = null) {
+  async function requestSimplification(text, type, gradePrompt) {
+
+    // Modify the text to include the grade-level prompt
+    let modifiedText = `${text} ${gradePrompt}`;
+
     // This URL points to the API server and the name of the directory within the API
     let url = "http://127.0.0.1:8000/simplify/";
+    
     // Number of paragraphs
     let amount = type === "document" ? `${totalParagraphs}/` : "";
-
-    // 👇 Grade-aware prompt suffix
-    let gradePromptSuffix = "";
-
-    if (grade === "Elementary") gradePromptSuffix = " Reader has elementary level reading proficiency.";
-    else if (grade === "High-School") gradePromptSuffix = " Reader has high school level reading proficiency.";
-    else if (grade === "College") gradePromptSuffix = " Reader has college level reading proficiency.";
-
-    // 👇 Combine with your base prompt
-    const promptText = text + " " + gradePromptSuffix;
-
     let response = await fetch(url + amount, {
       mode: "cors",
       method: "POST",
-      body: JSON.stringify({ type: type, text: promptText }),
+      body: JSON.stringify({ type: type, text:  modifiedText }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -71,23 +79,19 @@
    * @param {*} type type of text being sent, we have only used at the sentence level
    *                 but views.py in the API can be modified to accept other levels
    */
-  async function getNewText(data, type) {
+  async function getNewText(data, type, gradePrompt) {
     var toSendBack = [];
-
-    // Fetch grade from Chrome storage
-    const stored = await new Promise((resolve) => {
-      chrome.storage.sync.get("atsp_settings", resolve);
-    });
-    const grade = stored?.atsp_settings?.grade || null;
-    console.log("Using grade level:", grade);
 
     var keys = Object.keys(data);
     for (var i = 0; i < keys.length; i++) {
-      let textID = keys[i];
+      textID = keys[i];
 
-      let simple = await requestSimplification(data[textID], type, grade);
-      toSendBack.push({sentenceID: textID, text: simple});
+      // Add grade-level prompt to text before simplifying
+      let simple = await requestSimplification(data[textID], type, gradePrompt);
+      toSendBack.push({ sentenceID: textID, text: simple });
     }
+
+    
     // send to content script and modify those words
     let toSend = JSON.stringify(toSendBack);
 

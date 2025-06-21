@@ -46,6 +46,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   
+  // Capture grade level selection and send it to background.js
+  const gradeRadios = document.getElementsByName("grade");
+
+  gradeRadios.forEach(radio => {
+      radio.addEventListener("change", function () {
+          let selectedGrade = document.querySelector('input[name="grade"]:checked').id;
+          // Send the selected grade level to background.js
+          chrome.runtime.sendMessage({ from: "popup", gradeLevel: selectedGrade });
+      });
+  });
   
 
   /**
