@@ -64,6 +64,16 @@
 
   // Check for existing stored extension settings to adjust the content to those settings
   chrome.storage.sync.get(CHROME_STORAGE_VAR, function (status) {
+
+    // Get the grade level from the settings
+    let gradeLevel = status[CHROME_STORAGE_VAR].grade;
+
+    // Get the simplification prompt based on the grade level
+    let simplificationPrompt = getSimplificationPrompt(gradeLevel);
+
+    // Now, call the function that processes simplification (like getNewText)
+    requestSimplification(data[textID], type, simplificationPrompt);
+
     switchingSetting(status[CHROME_STORAGE_VAR], true);
   });
 
@@ -110,7 +120,9 @@
    * of paragraph density.
    * @returns the element with the highest paragraph density, or the body element as a backup
    */
-  
+
+
+
   function identifyPageMainContent() {
     const allElements = Array.from(document.body.getElementsByTagName('*'));
 
@@ -149,6 +161,26 @@
 
   }
 
+  // Sample prompts based on grade level
+  function getSimplificationPrompt(gradeLevel) {
+  let prompt = "Please simplify the text.";
+
+  switch (gradeLevel) {
+      case "Elementary":
+          prompt = "Reader has elementary level reading proficiency. Please simplify the text to match this level.";
+          break;
+      case "High-School":
+          prompt = "Reader has high school level reading proficiency. Please simplify the text to match this level.";
+          break;
+      case "College":
+          prompt = "Reader has college level reading proficiency. Please simplify the text to match this level.";
+          break;
+      default:
+          break;
+  }
+
+  return prompt;
+}
 
 
 

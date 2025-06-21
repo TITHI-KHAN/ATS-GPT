@@ -46,16 +46,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   
-  // Capture grade level selection and send it to background.js
-  const gradeRadios = document.getElementsByName("grade");
-
-  gradeRadios.forEach(radio => {
-      radio.addEventListener("change", function () {
-          let selectedGrade = document.querySelector('input[name="grade"]:checked').id;
-          // Send the selected grade level to background.js
-          chrome.runtime.sendMessage({ from: "popup", gradeLevel: selectedGrade });
-      });
-  });
   
 
   /**
@@ -142,11 +132,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
         for (const [setting, preset] of Object.entries(presets)) {
           $("#" + setting).parent().addClass("hide");
           settings[setting] = preset;
-
-        }
+        };
       }
     }
-   
   }
 
 
@@ -180,6 +168,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
     /* Toggles (e.g. highlightComplexToggle) only have one input, so check if that input is checked (i.e. the length of input:checked === 1)
     * Otherwise, get the ID of the selected input, which works for all buttong groups
     */
+
+    // Capture the grade level setting
+    let gradeLevel = settings["grade"]; // Get the selected grade level
+
     if ($(setting_node).children("input").length === 1) {
       var value = $(setting_node).children("input:checked").length === 1;
     } else {
