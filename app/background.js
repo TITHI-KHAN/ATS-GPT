@@ -40,7 +40,7 @@
     else if (grade === "College") gradePromptSuffix = " Reader has college level reading proficiency.";
 
     // 👇 Combine with your base prompt
-    const promptText = text + gradePromptSuffix;
+    const promptText = gradePromptSuffix + " " + text;
 
     console.log("Prompt with grade level:", promptText);
 
@@ -81,10 +81,11 @@
       chrome.storage.sync.get("atsp_settings", resolve);
     });
     const grade = stored?.atsp_settings?.grade || null;
+    console.log("Using grade level:", grade);
 
     var keys = Object.keys(data);
     for (var i = 0; i < keys.length; i++) {
-      textID = keys[i];
+      let textID = keys[i];
 
       let simple = await requestSimplification(data[textID], type, grade);
       toSendBack.push({sentenceID: textID, text: simple});
@@ -98,6 +99,13 @@
           from: "API",
           toChange: toSend,
           textType: type,
+        }, 
+        function(response) {
+          if (chrome.runtime.lastError) {
+            console.error("SendMessage error:", chrome.runtime.lastError.message);
+          } else {
+            console.log("Message sent successfully:", response);
+          }
         });
       });
     }
