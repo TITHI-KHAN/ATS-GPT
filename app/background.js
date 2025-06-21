@@ -40,9 +40,7 @@
     else if (grade === "College") gradePromptSuffix = " Reader has college level reading proficiency.";
 
     // 👇 Combine with your base prompt
-    const promptText = gradePromptSuffix + " " + text;
-
-    console.log("Prompt with grade level:", promptText);
+    const promptText = text + " " + gradePromptSuffix;
 
     let response = await fetch(url + amount, {
       mode: "cors",
@@ -99,13 +97,6 @@
           from: "API",
           toChange: toSend,
           textType: type,
-        }, 
-        function(response) {
-          if (chrome.runtime.lastError) {
-            console.error("SendMessage error:", chrome.runtime.lastError.message);
-          } else {
-            console.log("Message sent successfully:", response);
-          }
         });
       });
     }
