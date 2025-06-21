@@ -42,6 +42,8 @@
     // 👇 Combine with your base prompt
     const promptText = text + gradePromptSuffix;
 
+    console.log("Prompt with grade level:", promptText);
+
     let response = await fetch(url + amount, {
       mode: "cors",
       method: "POST",
