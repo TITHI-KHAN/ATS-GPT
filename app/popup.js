@@ -28,24 +28,21 @@ document.addEventListener("DOMContentLoaded", function (event) {
       "highlightComplexToggle": true,
       "whereToSetting": "Popup",
       "howLongSetting": "Manual",
-      "highlightReplacedToggle": true,
-      "grade": "Elementary"  // Default Grade Level for "lexical"
+      "highlightReplacedToggle": true
     },
     "syntactic_and_lexical": {
       "howMuchSetting": "Sentence",
       "highlightComplexToggle": true,
       "whereToSetting": "InPlace",
       "howLongSetting": "Manual",
-      "highlightReplacedToggle": true,
-      "grade": "High-School"  // Default Grade Level for "syntactic_and_lexical"
+      "highlightReplacedToggle": true
     },
     "syntactic": {
       "howMuchSetting": "Sentence",
       "highlightComplexToggle": true,
       "whereToSetting": "InPlace",
       "howLongSetting": "Manual",
-      "highlightReplacedToggle": true,
-      "grade": "College"  // Default Grade Level for "syntactic"
+      "highlightReplacedToggle": true
     }
   }
   
@@ -136,17 +133,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
           $("#" + setting).parent().addClass("hide");
           settings[setting] = preset;
 
-          // If the preset setting is 'grade', we set the grade here
-          if (setting === "grade") {
-            settings["grade"] = preset;  // Set the grade (Elementary, High-School, College)
-          }
         }
       }
-    }
-
-    // After applying the presets, we check to make sure the grade is correctly displayed
-    if (settings["grade"]) {
-      $("#" + settings["grade"]).prop("checked", true);
     }
    
   }
