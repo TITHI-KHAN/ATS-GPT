@@ -45,7 +45,7 @@
     let response = await fetch(url + amount, {
       mode: "cors",
       method: "POST",
-      body: JSON.stringify({ type: type, text: text }),
+      body: JSON.stringify({ type: type, text: promptText }),
       headers: {
         "Content-Type": "application/json",
       },
