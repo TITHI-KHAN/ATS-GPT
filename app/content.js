@@ -74,7 +74,7 @@
    * If it comes from the API, we updated the replacedSentences and mark up complex text
    * to add the functionality to replace it.
    */
-  chrome.runtime.onMessage.addListener(function(request) {
+  chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (request.from === "extension") {
       switchingSetting(request.settings, request.resets);
     } 
@@ -90,6 +90,9 @@
         markupComplexText();
       }
     }
+    // This tells Chrome we're done responding
+    sendResponse({ received: true });
+    return true; // Keeps the message port open for async handling
   });
 
 
