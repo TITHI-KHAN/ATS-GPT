@@ -2,6 +2,17 @@
 
 document.addEventListener("DOMContentLoaded", function (event) {
 
+  // Capture the grade level selection
+  let gradeLevel = "Elementary"; // Default grade level
+  $("input[name='grade']").on("change", function() {
+    gradeLevel = $("input[name='grade']:checked").attr("id");
+    // Send the grade level selection to content.js
+    chrome.runtime.sendMessage({
+      from: "popup",
+      gradeLevel: gradeLevel
+    });
+  });
+
   // This variable needs to match the same variable on content.js, as that's where the extension settings are stored
   let CHROME_STORAGE_VAR = "atsp_settings";
 
@@ -168,10 +179,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
     /* Toggles (e.g. highlightComplexToggle) only have one input, so check if that input is checked (i.e. the length of input:checked === 1)
     * Otherwise, get the ID of the selected input, which works for all buttong groups
     */
-
-    // Capture the grade level setting
-    let gradeLevel = settings["grade"]; // Get the selected grade level
-
     if ($(setting_node).children("input").length === 1) {
       var value = $(setting_node).children("input:checked").length === 1;
     } else {

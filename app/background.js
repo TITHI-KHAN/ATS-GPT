@@ -26,7 +26,7 @@
    * @returns a JSON object containing simplified versions of the provided text argument that
    * align with the simplification settings, currently pulled from sample.json
    */
-  async function requestSimplification(text, type, simplificationPrompt) {
+  async function requestSimplification(text, type) {
     // This URL points to the API server and the name of the directory within the API
     let url = "http://127.0.0.1:8000/simplify/";
     // Number of paragraphs
@@ -34,7 +34,7 @@
     let response = await fetch(url + amount, {
       mode: "cors",
       method: "POST",
-      body: JSON.stringify({ type: type, text: text, prompt: simplificationPrompt }),
+      body: JSON.stringify({ type: type, text: text }),
       headers: {
         "Content-Type": "application/json",
       },
