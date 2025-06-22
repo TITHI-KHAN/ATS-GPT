@@ -26,15 +26,27 @@
    * @returns a JSON object containing simplified versions of the provided text argument that
    * align with the simplification settings, currently pulled from sample.json
    */
-  async function requestSimplification(text, type) {
+  async function requestSimplification(text, type, grade = null) {
     // This URL points to the API server and the name of the directory within the API
     let url = "http://127.0.0.1:8000/simplify/";
     // Number of paragraphs
     let amount = type === "document" ? `${totalParagraphs}/` : "";
+
+    // Grade-aware prompt prefix
+    let gradePromptSuffix = "";
+    if (grade === "Elementary") gradePromptSuffix = "Reader has elementary level reading proficiency. ";
+    else if (grade === "High-School") gradePromptSuffix = "Reader has high school level reading proficiency. ";
+    else if (grade === "College") gradePromptSuffix = "Reader has college level reading proficiency. ";
+
+    const promptText = gradePromptSuffix + text;
+
+    console.log("Prompt with grade level:", promptText);
+
+
     let response = await fetch(url + amount, {
       mode: "cors",
       method: "POST",
-      body: JSON.stringify({ type: type, text: text }),
+      body: JSON.stringify({ type: type, text: promptText }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -63,11 +75,18 @@
   async function getNewText(data, type) {
     var toSendBack = [];
 
+    // Fetch grade from Chrome storage
+    const stored = await new Promise((resolve) => {
+      chrome.storage.sync.get("atsp_settings", resolve);
+    });
+    const grade = stored?.atsp_settings?.grade || null;
+    console.log("Using grade level:", grade);
+
     var keys = Object.keys(data);
     for (var i = 0; i < keys.length; i++) {
       textID = keys[i];
 
-      let simple = await requestSimplification(data[textID], type);
+      let simple = await requestSimplification(data[textID], type, grade);
       toSendBack.push({sentenceID: textID, text: simple});
     }
     // send to content script and modify those words

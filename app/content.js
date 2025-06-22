@@ -90,36 +90,7 @@
         markupComplexText();
       }
     }
-    // New listener handling messages from the popup
-    else if (request.from === "popup") {
-      let gradeLevel = request.gradeLevel;
-      // Update the simplification settings or prompts based on the grade level
-      updateSimplificationPrompt(gradeLevel);
-    }
   });
-
-  // Function to update simplification prompt based on grade level
-  function updateSimplificationPrompt(gradeLevel) {
-    let prompt = "";
-
-    switch (gradeLevel) {
-      case "Elementary":
-        prompt = "Reader has elementary level reading proficiency. Simplify the text with very basic vocabulary.";
-        break;
-      case "High-School":
-        prompt = "Reader has high school level reading proficiency. Simplify the text but use intermediate vocabulary.";
-        break;
-      case "College":
-        prompt = "Reader has college level reading proficiency. Keep the text clear but use advanced vocabulary.";
-        break;
-      default:
-        prompt = "Simplify the text.";
-        break;
-    }
-    // Now you can use this prompt for your simplification API call or logic
-    console.log("Setting simplification prompt: ", prompt);
-    // Optionally, send this prompt to an API or modify the simplification logic
-  }
 
 
   
