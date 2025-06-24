@@ -1,6 +1,8 @@
 // content.js - modifies and adds behaviors to active tab page
 
 (function main() {
+
+  let gradeLevel = null;  // Variable to store grade level
   
   // These variables store the original and replaced sentences
   var originalSentences = {};
@@ -55,11 +57,18 @@
     markedUpSentences[sentence.id] = sentence.innerHTML;
   });
 
-  // Send message to background.js with collected sentences
-  chrome.runtime.sendMessage({
-    from: "content",
-    toSimplify: originalSentences
+  // Fetch settings from Chrome storage before sending message to background
+  chrome.storage.sync.get(CHROME_STORAGE_VAR, function (status) {
+    const settings = status[CHROME_STORAGE_VAR] || {};
+    gradeLevel = settings.grade || null;
+
+    chrome.runtime.sendMessage({
+      from: "content",
+      toSimplify: originalSentences,
+      gradeLevel: gradeLevel
+    });
   });
+  
 
 
   // Check for existing stored extension settings to adjust the content to those settings
@@ -74,7 +83,7 @@
    * If it comes from the API, we updated the replacedSentences and mark up complex text
    * to add the functionality to replace it.
    */
-  chrome.runtime.onMessage.addListener(function(request) {
+  chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (request.from === "extension") {
       switchingSetting(request.settings, request.resets);
     } 
@@ -90,6 +99,18 @@
         markupComplexText();
       }
     }
+
+    // Listen for messages from popup.js to get grade level
+    else if (request.from === "popup") {
+      gradeLevel = request.gradeLevel;  // Store the selected grade level
+      console.log("Grade level received in content.js:", gradeLevel);  // Log the grade level for debugging
+    }
+    // Respond to the message from popup.js
+    sendResponse({ message: "Grade level received" });
+  
+  // Always return true to indicate an asynchronous response
+  return true;
+
   });
 
 

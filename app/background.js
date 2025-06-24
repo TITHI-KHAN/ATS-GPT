@@ -2,6 +2,7 @@
 
 (function() {
 
+  let currentGrade = null; // global grade for safe access
   var totalParagraphs = 0;
 
   /*
@@ -10,11 +11,14 @@
    *    {from: "content",
    *    toSimplify: [...sentences to simplify]}
    */
-  chrome.runtime.onMessage.addListener(async function (request) {
+  chrome.runtime.onMessage.addListener(async function (request, sender, sendResponse) {
     if (request.from === "content") {
       sentenceData = request.toSimplify;
       await getNewText(sentenceData, "sentence");
+      sendResponse({ message: "Text simplification complete" });
     }
+    // Always return true to indicate an asynchronous response
+    return true;
   });
 
   /**
@@ -32,15 +36,18 @@
     // Number of paragraphs
     let amount = type === "document" ? `${totalParagraphs}/` : "";
 
-    // Grade-aware prompt prefix
+    // Grade-aware prompt suffix
     let gradePromptSuffix = "";
-    if (grade === "Elementary") gradePromptSuffix = "Reader has elementary level reading proficiency. ";
-    else if (grade === "High-School") gradePromptSuffix = "Reader has high school level reading proficiency. ";
-    else if (grade === "College") gradePromptSuffix = "Reader has college level reading proficiency. ";
+    if (grade === "Elementary") {
+      gradePromptSuffix = "Reader has elementary level reading proficiency. ";
+    } else if (grade === "High-School") {
+      gradePromptSuffix = "Reader has high school level reading proficiency. ";
+    } else if (grade === "College") {
+      gradePromptSuffix = "Reader has college level reading proficiency. ";
+    }
 
     const promptText = gradePromptSuffix + text;
-
-    console.log("Prompt with grade level:", promptText);
+    console.log("Generated Prompt with grade level:", promptText);  // Log the prompt with grade level
 
 
     let response = await fetch(url + amount, {
@@ -75,18 +82,11 @@
   async function getNewText(data, type) {
     var toSendBack = [];
 
-    // Fetch grade from Chrome storage
-    const stored = await new Promise((resolve) => {
-      chrome.storage.sync.get("atsp_settings", resolve);
-    });
-    const grade = stored?.atsp_settings?.grade || null;
-    console.log("Using grade level:", grade);
-
     var keys = Object.keys(data);
     for (var i = 0; i < keys.length; i++) {
       textID = keys[i];
 
-      let simple = await requestSimplification(data[textID], type, grade);
+      let simple = await requestSimplification(data[textID], type);
       toSendBack.push({sentenceID: textID, text: simple});
     }
     // send to content script and modify those words

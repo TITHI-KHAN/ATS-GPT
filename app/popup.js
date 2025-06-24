@@ -2,6 +2,24 @@
 
 document.addEventListener("DOMContentLoaded", function (event) {
 
+  // Capture grade level selection
+  const gradeRadioButtons = document.querySelectorAll('input[name="grade"]');
+  gradeRadioButtons.forEach(button => {
+    button.addEventListener('change', function () {
+      const gradeLevel = document.querySelector('input[name="grade"]:checked').id;
+
+      // Log the grade level when selected
+      console.log("Grade level selected:", gradeLevel);
+      
+      // Send selected grade level to content.js
+      chrome.runtime.sendMessage({
+        from: "popup",
+        gradeLevel: gradeLevel
+      });
+    });
+  });
+
+
   // This variable needs to match the same variable on content.js, as that's where the extension settings are stored
   let CHROME_STORAGE_VAR = "atsp_settings";
 
@@ -183,11 +201,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
           from: "extension",
           settings: settings,
           updated: setting,
-          resets: resets,
+          resets: resets
         });
       }
     });
-  
 
 
     if (setting === "enabled") {
