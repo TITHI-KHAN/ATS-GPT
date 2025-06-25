@@ -23,11 +23,11 @@ class Replacer(models.Model):
             instruction = f"""
             For the given sentence: "{text}", perform the following tasks:
 
-            1. Identify **all** complex or less common words and provide their simpler synonyms.
-            2. Provide a **lexical simplification** of the sentence by replacing complex words with simpler synonyms, ensuring to simplify as many words as possible without altering the meaning.
-            3. Provide a **sentence paraphrase** that conveys the same meaning in simpler, more straightforward terms.
-            4. Provide a **syntactic simplification** by breaking down complex sentence structures into simpler ones.
-            5. Provide a **syntactic and lexical simplification** by applying both sentence structure simplification and word replacement.
+            1. Identify all complex or uncommon words and list simpler synonyms. Focus on words that a general reader or non-native speaker might find difficult, and ensure the suggested synonyms preserve the original meaning.
+            2. Rewrite using simpler vocabulary. Replace complex or rare terms with more common synonyms while keeping the meaning unchanged. Simplify as many words as possible, ensuring the sentence remains grammatically correct and semantically accurate.
+            3. Paraphrase in simpler, more straightforward language. Use clear, everyday wording without omitting important details. The meaning should remain exactly the same, expressed in accessible terms.
+            4. Rewrite with simpler syntax. Break down long or complex sentence structures into shorter, clearer ones while preserving the original meaning.
+            5. Simplify both vocabulary and sentence structure. Replace difficult words with easier synonyms and split up complex constructions if needed. Ensure the result is fluent, easy to read, and faithful to the original meaning.
             Format the response as follows:
             
             "{text}": {{ 
