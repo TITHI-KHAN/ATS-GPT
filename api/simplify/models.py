@@ -30,9 +30,7 @@ class Replacer(models.Model):
                 gradePromptSuffix = "For all simplifications, use clear, conversational language familiar to a high school reader."
             elif grade == "College":
                 gradePromptSuffix = "For all simplifications, maintain semantic integrity and allow some domain-specific vocabulary suitable for a college-level reader."
-            else:
-                gradePromptSuffix = "For all simplifications, use appropriate language for the target audience."
-
+        
 
             instruction = f"""
             For the given sentence: "{text}", perform the following tasks:
