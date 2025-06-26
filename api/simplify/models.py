@@ -21,7 +21,7 @@ class Replacer(models.Model):
     def generate_simplifications(self, text):
         try:
 
-            # Grade-aware prompt suffix
+            # Grade-related prompt suffix
             gradePromptSuffix = ""
             if grade == "Elementary":
                 gradePromptSuffix = "Reader has elementary level reading proficiency. "
