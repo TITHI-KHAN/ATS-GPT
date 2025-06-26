@@ -21,15 +21,17 @@ class Replacer(models.Model):
     def generate_simplifications(self, text):
         try:
 
-            // Updated grade-aware prompt suffix
-            let gradePromptSuffix = "";
-            if (grade === "Elementary") {
-                gradePromptSuffix = "For all simplifications, use short, easy to read sentences and words an elementary student would know.";
-            } else if (grade === "High School") {
-                gradePromptSuffix = "For all simplifications, use clear, conversational language familiar to a high school reader.";
-            } else if (grade === "College") {
-                gradePromptSuffix = "For all simplifications, maintain semantic integrity and allow some domain-specific vocabulary suitable for a college-level reader.";
-            }
+            # Grade-aware prompt suffix using gradePromptSuffix
+            gradePromptSuffix = ""
+            
+            if grade == "Elementary":
+                gradePromptSuffix = "For all simplifications, use short, easy to read sentences and words an elementary student would know."
+            elif grade == "High School":
+                gradePromptSuffix = "For all simplifications, use clear, conversational language familiar to a high school reader."
+            elif grade == "College":
+                gradePromptSuffix = "For all simplifications, maintain semantic integrity and allow some domain-specific vocabulary suitable for a college-level reader."
+            else:
+                gradePromptSuffix = "For all simplifications, use appropriate language for the target audience."
 
 
             instruction = f"""
@@ -56,8 +58,15 @@ class Replacer(models.Model):
             
             # Combine the gradePromptSuffix and instruction to form the full prompt
             promptText = gradePromptSuffix + instruction
-            console.log("Generated Prompt with grade level:", promptText);  # Log the full prompt
-        
+            
+            # Debugging: Print parts of the prompt separately to check each part
+            print("Grade level prompt suffix:", gradePromptSuffix)  # Log the grade level suffix
+            print("Instruction text:", instruction)  # Log the instruction text
+            print("Generated Prompt with grade level:", promptText)  # Log the full prompt
+            
+            # The rest of your API call or further processing would go here
+            return promptText
+
             
             response = client.chat.completions.create(
                 model="gpt-4",
