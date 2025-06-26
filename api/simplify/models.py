@@ -20,6 +20,17 @@ class Replacer(models.Model):
         return cleaned_str
     def generate_simplifications(self, text):
         try:
+
+            # Grade-aware prompt suffix
+            gradePromptSuffix = ""
+            if grade == "Elementary":
+                gradePromptSuffix = "Reader has elementary level reading proficiency. "
+            elif grade == "High-School":
+                gradePromptSuffix = "Reader has high school level reading proficiency. "
+            elif grade == "College":
+                gradePromptSuffix = "Reader has college level reading proficiency. "
+
+
             instruction = f"""
             For the given sentence: "{text}", perform the following tasks:
 
@@ -42,6 +53,10 @@ class Replacer(models.Model):
             }}
             """
             
+            # Combine the gradePromptSuffix and instruction to form the full prompt
+            promptText = gradePromptSuffix + instruction
+            print("Generated Prompt with grade level:", promptText)  # Log the full prompt
+        
             response = client.chat.completions.create(
                 model="gpt-4",
                 messages=[
